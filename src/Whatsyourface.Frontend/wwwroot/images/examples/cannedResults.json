@@ -1,0 +1,150 @@
+{
+  "exampleSets": [
+    {
+      "countryCode": "uk",
+      "examples": [
+        {
+          "imageFile": "example-0001.jpg",
+          "matches": [
+            {
+              "firstName": "Philip",
+              "score": 23.34
+            },
+            {
+              "firstName": "Henry",
+              "score": 23.06
+            },
+            {
+              "firstName": "Alexander",
+              "score": 22.76
+            }
+          ]
+        },
+        {
+          "imageFile": "example-0002.jpg",
+          "matches": [
+            {
+              "firstName": "Benjamin",
+              "score": 28.71
+            },
+            {
+              "firstName": "Michael",
+                "score": 21.50
+            },
+            {
+              "firstName": "Tom",
+              "score": 21.05
+            }
+          ]
+        },
+        {
+          "imageFile": "example-0003.jpg",
+          "matches": [
+            {
+              "firstName": "Anthony",
+              "score": 26.31
+            },
+            {
+              "firstName": "John",
+              "score": 20.13
+            },
+            {
+              "firstName": "Benjamin",
+              "score": 20.06
+            }
+          ]
+        },
+        {
+          "imageFile": "example-0004.jpg",
+          "matches": [
+            {
+              "firstName": "Alexander",
+              "score": 25.04
+            },
+            {
+              "firstName": "Owen",
+              "score": 24.34
+            },
+            {
+              "firstName": "John",
+              "score": 17.02
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "countryCode": "fr",
+      "examples": [
+        {
+          "imageFile": "example-0001.jpg",
+          "matches": [
+            {
+              "firstName": "Bruno",
+              "score": 25.30
+            },
+            {
+              "firstName": "Bernard",
+              "score": 24.08
+            },
+            {
+              "firstName": "Emmanuel",
+              "score": 17.20
+            }
+          ]
+        },
+        {
+          "imageFile": "example-0002.jpg",
+          "matches": [
+            {
+              "firstName": "Mathieu",
+              "score": 32.78
+            },
+            {
+              "firstName": "Jerome",
+              "score": 19.91
+            },
+            {
+              "firstName": "Joseph",
+              "score": 19.82
+            }
+          ]
+        },
+        {
+          "imageFile": "example-0003.jpg",
+          "matches": [
+            {
+              "firstName": "Bernard",
+              "score": 30.85
+            },
+            {
+              "firstName": "Laurent",
+              "score": 19.38
+            },
+            {
+              "firstName": "David",
+              "score": 18.86
+            }
+          ]
+        },
+        {
+          "imageFile": "example-0004.jpg",
+          "matches": [
+            {
+              "firstName": "Bernard",
+              "score": 25.04
+            },
+            {
+              "firstName": "Sébastien",
+              "score": 18.92
+            },
+            {
+              "firstName": "Romain",
+              "score": 18.86
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

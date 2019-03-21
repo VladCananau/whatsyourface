@@ -33,13 +33,13 @@
                 <label class="btn btn-toolbar">
                     @Html.RadioButtonFor(model => model.CountryCode, "fr",
                         new { id = "countryFrRadio", required = true, @checked = string.Equals(Model.CountryCode, "fr", StringComparison.OrdinalIgnoreCase) ? true : false })
-                    <img class="img-thumbnail" src="~/images/flags/frflag.svg" alt="France">
+                    <img class="img-thumbnail" src="~/images/flags/frflag.svg" alt="France" title="France">
                 </label>
 
                 <label class="btn btn-toolbar">
                     @Html.RadioButtonFor(model => model.CountryCode, "uk",
                          new { id = "countryUkRadio", @checked = string.Equals(Model.CountryCode, "uk", StringComparison.OrdinalIgnoreCase) ? true : false })
-                    <img class="img-thumbnail" src="~/images/flags/ukflag.svg" alt="United Kingdom">
+                    <img class="img-thumbnail" src="~/images/flags/ukflag.svg" alt="United Kingdom" title="United Kingdom">
                 </label>
             </div>
         </div>

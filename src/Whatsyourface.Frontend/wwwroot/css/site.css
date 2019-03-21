@@ -29,6 +29,20 @@ body {
     width: 0px;
 }
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    padding: 1rem;
+}
+
+.svg-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    padding-left: 2px;
+    vertical-align: text-top;
+}
+
 /* QR code generator */
 #qrCode {
     margin: 15px;

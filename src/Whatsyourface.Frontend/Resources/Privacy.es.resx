@@ -117,52 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Browse" xml:space="preserve">
-    <value>Explorer</value>
+  <data name="AboutCookies" xml:space="preserve">
+    <value>What´s Your Face (la Aplicacion) utiliza un cookie para el navegador llamado "whatsyourface.culture" para recordar tu idoma preferido (ves ahí en la parte de arriba y derecha)?</value>
   </data>
-  <data name="Country_fr" xml:space="preserve">
-    <value>France</value>
+  <data name="AboutPersonalData" xml:space="preserve">
+    <value>La Aplicacion no guarda nada de tus datos personales.</value>
   </data>
-  <data name="Country_uk" xml:space="preserve">
-    <value>Royaume-Uni</value>
+  <data name="AboutPhotos" xml:space="preserve">
+    <value>Ni la Aplicacion, ni la tecnología aquella usa (Azure Cognitive Services) no retienen las fotos que tú subes por la pagina web. Cognitive Services extrae los "atributos" (manera pretenciosa de llamar a unos números) de tu cara y los guarda 24 horas luego los borra. La Aplicacion usa los "atributos" para calcular los nombres que se lleven mejor con tu cara, y luego no los usa más hasta que se borren después de las 24 horas. </value>
   </data>
-  <data name="ErrorFileTooLarge" xml:space="preserve">
-    <value>Le fichier image ne peut pas etre plus grande que 5Mo</value>
+  <data name="Accept" xml:space="preserve">
+    <value>De acuerdo</value>
   </data>
-  <data name="ErrorMatchingFaceToName" xml:space="preserve">
-    <value>Essayez avec autre photo s'il vous plait. Il fait contenir un seul visage</value>
+  <data name="Back" xml:space="preserve">
+    <value>Regresar</value>
   </data>
-  <data name="ErrorNoCountry" xml:space="preserve">
-    <value>Vous devez choisir une photo</value>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Leer más</value>
   </data>
-  <data name="ErrorNoImage" xml:space="preserve">
-    <value>Vous devez choisir une photo</value>
-  </data>
-  <data name="Github" xml:space="preserve">
-    <value>Voyez-la sur</value>
-  </data>
-  <data name="Step1" xml:space="preserve">
-    <value>Choisissez un pays</value>
-  </data>
-  <data name="Step2" xml:space="preserve">
-    <value>Téléchargez une photo</value>
-  </data>
-  <data name="Step3" xml:space="preserve">
-    <value>Ou utilisez aucune des miennes</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value>Quelque chose s'est passé :( C'est de moi</value>
-  </data>
-  <data name="Subtitle" xml:space="preserve">
-    <value>On vous dit que "vous ne semblez pas à votre nombre"?</value>
-  </data>
-  <data name="SuccessFormat" xml:space="preserve">
-    <value>En {0} vous semblez à:</value>
-  </data>
-  <data name="Sweet" xml:space="preserve">
-    <value>Super!</value>
-  </data>
-  <data name="Whoops" xml:space="preserve">
-    <value>Oh-la-la!</value>
+  <data name="Summary" xml:space="preserve">
+    <value>Utilizamos cookies para recordar el idoma que prefieras. Nunca guardamos tus fotos.</value>
   </data>
 </root>

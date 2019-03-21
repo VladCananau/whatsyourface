@@ -142,6 +142,15 @@ namespace WhatsYourFace.Frontend.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to See it on.
+        /// </summary>
+        public static string Github {
+            get {
+                return ResourceManager.GetString("Github", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose a country.
         /// </summary>
         public static string Step1 {

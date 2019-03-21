@@ -141,6 +141,9 @@
   <data name="ErrorNoImage" xml:space="preserve">
     <value>Trebuie să alegi o fotografie</value>
   </data>
+  <data name="Github" xml:space="preserve">
+    <value>Vezi pe</value>
+  </data>
   <data name="Step1" xml:space="preserve">
     <value>Alege țara</value>
   </data>

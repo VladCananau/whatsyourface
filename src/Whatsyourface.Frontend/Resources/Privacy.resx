@@ -117,52 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Browse" xml:space="preserve">
-    <value>Explorer</value>
+  <data name="AboutCookies" xml:space="preserve">
+    <value>What's Your Face (the App) uses a browser cookie called "whatsyourface.culture" to remember your language preference (see there on the top right of this page?).</value>
   </data>
-  <data name="Country_fr" xml:space="preserve">
-    <value>France</value>
+  <data name="AboutPersonalData" xml:space="preserve">
+    <value>What's Your Face does not store or retrieve any personal data about you.</value>
   </data>
-  <data name="Country_uk" xml:space="preserve">
-    <value>Royaume-Uni</value>
+  <data name="AboutPhotos" xml:space="preserve">
+    <value>Neither the App nor the face recognition technology which it uses (Azure Cognitive Services) store any of the photos you upload. Cognitive Services extracts the "features" of your face (that's fancy talk for numbers) and stores them for 24 hours after which they are discarded. The App uses the "features" to calculate the names that most match our face, after which it does not use them again until they are discarded from Cognitive Services 24 hours later.</value>
   </data>
-  <data name="ErrorFileTooLarge" xml:space="preserve">
-    <value>Le fichier image ne peut pas etre plus grande que 5Mo</value>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
   </data>
-  <data name="ErrorMatchingFaceToName" xml:space="preserve">
-    <value>Essayez avec autre photo s'il vous plait. Il fait contenir un seul visage</value>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
   </data>
-  <data name="ErrorNoCountry" xml:space="preserve">
-    <value>Vous devez choisir une photo</value>
+  <data name="LearnMore" xml:space="preserve">
+    <value>LearnMore</value>
   </data>
-  <data name="ErrorNoImage" xml:space="preserve">
-    <value>Vous devez choisir une photo</value>
-  </data>
-  <data name="Github" xml:space="preserve">
-    <value>Voyez-la sur</value>
-  </data>
-  <data name="Step1" xml:space="preserve">
-    <value>Choisissez un pays</value>
-  </data>
-  <data name="Step2" xml:space="preserve">
-    <value>Téléchargez une photo</value>
-  </data>
-  <data name="Step3" xml:space="preserve">
-    <value>Ou utilisez aucune des miennes</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value>Quelque chose s'est passé :( C'est de moi</value>
-  </data>
-  <data name="Subtitle" xml:space="preserve">
-    <value>On vous dit que "vous ne semblez pas à votre nombre"?</value>
-  </data>
-  <data name="SuccessFormat" xml:space="preserve">
-    <value>En {0} vous semblez à:</value>
-  </data>
-  <data name="Sweet" xml:space="preserve">
-    <value>Super!</value>
-  </data>
-  <data name="Whoops" xml:space="preserve">
-    <value>Oh-la-la!</value>
+  <data name="Summary" xml:space="preserve">
+    <value>We use cookies to remember your language preferences. We never save or store your photos.</value>
   </data>
 </root>

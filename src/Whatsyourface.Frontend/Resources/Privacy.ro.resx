@@ -117,52 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Browse" xml:space="preserve">
-    <value>Explorer</value>
+  <data name="AboutCookies" xml:space="preserve">
+    <value>What's Your Face (Aplicația) folosește un cookie pentru navigator numit  "whatsyourface.culture" pentru a reține preferința ta pentru limbă (vezi acolo, în partea din dreapta sus a paginii?).</value>
   </data>
-  <data name="Country_fr" xml:space="preserve">
-    <value>France</value>
+  <data name="AboutPersonalData" xml:space="preserve">
+    <value>Aplicația nu păstrează și nu accesează date personale ale tale. </value>
   </data>
-  <data name="Country_uk" xml:space="preserve">
-    <value>Royaume-Uni</value>
+  <data name="AboutPhotos" xml:space="preserve">
+    <value>Nici Aplicația însăși și nici tehnologia de recunoaștere facială pe care o utilizează (Azure Cognitive Services) nu stochează fotografiile pe care le încarci prin intermediul paginii web. Cognitive Services extrage ”atributele” imaginii (un fel pompos de a spune - niște numere) și le păstrează pentru 24 de ore după care le șterge. Aplicația folosește aceste ”atribute” pentru a calcula care nume se potrivesc cel mai mult feței tale, după care nu le mai folosește deloc până ce sunt șterse după cele 24 de ore.</value>
   </data>
-  <data name="ErrorFileTooLarge" xml:space="preserve">
-    <value>Le fichier image ne peut pas etre plus grande que 5Mo</value>
+  <data name="Accept" xml:space="preserve">
+    <value>De acord</value>
   </data>
-  <data name="ErrorMatchingFaceToName" xml:space="preserve">
-    <value>Essayez avec autre photo s'il vous plait. Il fait contenir un seul visage</value>
+  <data name="Back" xml:space="preserve">
+    <value>Înapoi</value>
   </data>
-  <data name="ErrorNoCountry" xml:space="preserve">
-    <value>Vous devez choisir une photo</value>
+  <data name="LearnMore" xml:space="preserve">
+    <value>Citește mai mult</value>
   </data>
-  <data name="ErrorNoImage" xml:space="preserve">
-    <value>Vous devez choisir une photo</value>
-  </data>
-  <data name="Github" xml:space="preserve">
-    <value>Voyez-la sur</value>
-  </data>
-  <data name="Step1" xml:space="preserve">
-    <value>Choisissez un pays</value>
-  </data>
-  <data name="Step2" xml:space="preserve">
-    <value>Téléchargez une photo</value>
-  </data>
-  <data name="Step3" xml:space="preserve">
-    <value>Ou utilisez aucune des miennes</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value>Quelque chose s'est passé :( C'est de moi</value>
-  </data>
-  <data name="Subtitle" xml:space="preserve">
-    <value>On vous dit que "vous ne semblez pas à votre nombre"?</value>
-  </data>
-  <data name="SuccessFormat" xml:space="preserve">
-    <value>En {0} vous semblez à:</value>
-  </data>
-  <data name="Sweet" xml:space="preserve">
-    <value>Super!</value>
-  </data>
-  <data name="Whoops" xml:space="preserve">
-    <value>Oh-la-la!</value>
+  <data name="Summary" xml:space="preserve">
+    <value>Folosim cookies pentru a reține preferința ta pentru limbă. Nu păstrăm nici o fotografie de-a ta.</value>
   </data>
 </root>

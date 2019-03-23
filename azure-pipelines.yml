@@ -14,17 +14,6 @@ trigger:
     exclude:
     - README.md
 
-pr:
-  branches:
-    include:
-    - master*
-    - develop*
-    - feature*
-    - release*
-  paths:
-    exclude:
-    - README.md
-
 pool:
   vmImage: 'Ubuntu-16.04'
 

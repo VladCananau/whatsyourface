@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\Args\ICreateFaceListArgs.cs" Link="Commands\Args\ICreateFaceListArgs.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\Args\IDownloadImagesArgs.cs" Link="Commands\Args\IDownloadImagesArgs.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\Args\IMatchFaceToNamesArgs.cs" Link="Commands\Args\IMatchFaceToNamesArgs.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\Args\IRemoveGenderMismatchesArgs.cs" Link="Commands\Args\IRemoveGenderMismatchesArgs.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\Args\IUploadImagesToFaceListArgs.cs" Link="Commands\Args\IUploadImagesToFaceListArgs.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\CmdBase.cs" Link="Commands\CmdBase.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\CreateFaceListCmd.cs" Link="Commands\CreateFaceListCmd.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\DownloadImagesCmd.cs" Link="Commands\DownloadImagesCmd.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\MatchFaceToNamesCmd.cs" Link="Commands\MatchFaceToNamesCmd.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\RemoveGenderMismatchesCmd.cs" Link="Commands\RemoveGenderMismatchesCmd.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\ResultAggregation.cs" Link="Commands\ResultAggregation.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\UploadImagesToFaceListCmd.cs" Link="Commands\UploadImagesToFaceListCmd.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Commands\WyfCmd.cs" Link="Commands\WyfCmd.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\IConsole.cs" Link="IConsole.cs" />
+    <Compile Include="..\WhatsYourFace.Wyfcmd\Program.cs" Link="Program.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\WhatsYourFace.Wyfcmd\appsettings.json" Link="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\Args\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.4.3" />
+    <PackageReference Include="Dawn.Guard" Version="1.8.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.9.1" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Search.ImageSearch" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face" Version="2.3.0-preview" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.ApplicationInsights" Version="2.9.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
+    <PackageReference Include="PowerArgs" Version="3.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WhatsYourFace.Core\WhatsYourFace.Core.csproj" />
+    <ProjectReference Include="..\WhatsYourFace.DataSet\WhatsYourFace.DataSet.csproj" />
+    <ProjectReference Include="..\WhatsYourFace.Models\WhatsYourFace.Models.csproj" />
+    <ProjectReference Include="..\WhatsYourFace.Utilities\WhatsYourFace.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,5 +1,7 @@
 # What's Your Face
 
+[![Build Status](https://dev.azure.com/vladcananau/WhatsYourFace/_apis/build/status/VladCananau.whatsyourface?branchName=develop)](https://dev.azure.com/vladcananau/WhatsYourFace/_build/latest?definitionId=1&branchName=develop)
+
 Play with it at https://whatsyourfacefrontend.azurewebsites.net/. Upload a photo of your face (it must contain no more and no less than one face) and see what name you really look like. I was, of course, insipired by conversations like: 
 
 > "What's your name?" 

@@ -21,11 +21,22 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build src/WhatsYourFace.sln --configuration $(buildConfiguration)
+- script: |
+    dotnet build src/WhatsYourFace.sln --configuration $(buildConfiguration)
+    dotnet publish --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY
   displayName: 'dotnet build $(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
 
 - task: DotNetCoreCLI@2
   inputs:
     command: test
     projects: '**/*.Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+- task: AzureRmWebAppDeployment@3
+  condition: and(succeeded(), in(variables['Build.Reason'], 'Manual', 'IndividualCI', 'BatchedCI'), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  inputs:
+    azureSubscription: 'Azure VSSub WYF Test1'
+    WebAppName: 'WhatsYourFaceFrontend-Test1'
+    Package: $(System.ArtifactsDirectory)/**/*.zip

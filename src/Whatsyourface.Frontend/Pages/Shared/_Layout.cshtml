@@ -44,13 +44,13 @@
 
     <div class="container body-content">
         <header>
-            <div class="pull-right">
+            <div class="pull-right header-overlay">
                 | @foreach (string supportedCulture in this.LocalizationSettings.SupportedCultures)
                 {
-                    <span>
+                   <span>
                         <strong>
                             <a href="@this.Context.Request.Path"
-                               onclick="wyfCommon.setCultureCookie('@this.LocalizationSettings.CultureCookieName', '@supportedCulture')">
+                               onclick="wyfLocalization.setCultureCookie('@this.LocalizationSettings.CultureCookieName', '@supportedCulture')">
                                 @supportedCulture.ToUpperInvariant()
                             </a>
                         </strong> |

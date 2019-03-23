@@ -3,12 +3,12 @@
 
 // Write your Javascript code.
 
-var wyfCommon = {
+var wyfLocalization = {
     createCultureCookie: function (cookieName, cultureString) {
         return `${cookieName}=c=${cultureString}|uic=${cultureString}`;
     },
 
     setCultureCookie: function (cookieName, cultureString) {
-        document.cookie = wyfCommon.createCultureCookie(cookieName, cultureString);
+        document.cookie = wyfLocalization.createCultureCookie(cookieName, cultureString);
     }
 }

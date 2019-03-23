@@ -28,7 +28,7 @@
     @using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="col-xs-12 col-md-4 text-center">
-            <h1>@Index.Step1</h1>
+            <h2>@Index.Step1</h2>
             <div class="btn-group-justified" data-toggle="buttons">
                 <label class="btn btn-toolbar">
                     @Html.RadioButtonFor(model => model.CountryCode, "fr",
@@ -43,9 +43,9 @@
                 </label>
             </div>
         </div>
-        <div id="mainAreaDiv" class="col-xs-12 col-md-4 text-center">
-            <h1>@Index.Step2</h1>
-            <div class="well">
+        <div class="col-xs-12 col-md-4 text-center">
+            <h2>@Index.Step2</h2>
+            <div id="mainAreaDiv" class="well mainarea">
                 <button id="browseButton" type="button" class="btn btn-block btn-default btn-lg"
                         onclick="document.getElementById('imageFileInput').click()">
                     @Index.Browse
@@ -59,19 +59,19 @@
                         if (image.size <= @this.Model.FaceMatchSettings.MaxImageSizeInBytes) {
                             document.getElementById('thumbnailInput').value = null;
                             document.getElementById('resultsAreaDiv').classList.add('invisible-0px');
-                            document.getElementById('submitButton').classList.remove('invisible-0px');
+                            document.getElementById('submitButton').removeAttribute('disabled')
                             document.getElementById('photoPreviewImg').src = window.URL.createObjectURL(image);
                         }
                         else {
                             event.target.value = null;
                             document.getElementById('photoPreviewImg').removeAttribute('src');
-                            document.getElementById('submitButton').classList.add('invisible-0px');
+                            document.getElementById('submitButton').addAttribute('disabled');
                             window.alert("@Index.Whoops @Index.ErrorFileTooLarge");
                         }
                     }
                 </script>
                 <div>
-                    <img id="photoPreviewImg" width="200" />
+                    <img id="photoPreviewImg" class="img-preview" />
                 </div>
                 <div id="resultsAreaDiv" class="text-center">
                     @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
@@ -94,11 +94,11 @@
                 </div>
             </div>
             <div class="panel">
-                <input id="submitButton" class="btn btn-block btn-lg btn-primary invisible-0px" type="submit" value="What's your face?" />
+                <input id="submitButton" disabled class="btn btn-block btn-lg btn-primary" type="submit" value="What's your face?" />
             </div>
         </div>
         <div class="col-xs-12 col-md-4 text-center">
-            <h1>@Index.Step3</h1>
+            <h2>@Index.Step3</h2>
             <div class="btn-group-justified" data-toggle="buttons">
                 <label class="btn btn-toolbar">
                     <img src="~/images/examples/example-0001.jpg" class="img-thumbnail" onclick="selectThumbnail(event)" />
@@ -119,7 +119,7 @@
                         document.getElementById('photoPreviewImg').src = imageUrl;
                         document.getElementById('imageFileInput').value = null;
                         document.getElementById('resultsAreaDiv').classList.add('invisible-0px');
-                        document.getElementById('submitButton').classList.remove('invisible-0px');
+                        document.getElementById('submitButton').removeAttribute('disabled');
                     }
                 </script>
                 @Html.HiddenFor(model => model.ServerImageUrl, new { id = "thumbnailInput" })

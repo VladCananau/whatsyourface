@@ -38,9 +38,10 @@ steps:
     projects: '**/*.Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-- task: AzureRmWebAppDeployment@3
+- task: AzureRmWebAppDeployment@4
   condition: and(succeeded(), in(variables['Build.Reason'], 'Manual', 'IndividualCI', 'BatchedCI'), eq(variables['Build.SourceBranch'], 'refs/heads/pipeline-deploy'))
   inputs:
     azureSubscription: 'Azure VSSub WYF Test1'
     WebAppName: 'WhatsYourFaceFrontend-Test1'
     Package: $(System.ArtifactsDirectory)/**/*.zip
+    renameFilesFlag: True

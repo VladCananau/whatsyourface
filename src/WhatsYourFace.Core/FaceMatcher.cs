@@ -56,7 +56,7 @@ namespace WhatsYourFace.Core
                             photo,
                             returnFaceId: true,
                             returnFaceLandmarks: false,
-                            new[] { FaceAttributeType.Gender });
+                            new[] { FaceAttributeType.Gender }).ConfigureAwait(false);
 
             if (faces.Count() != 1)
             {
@@ -84,14 +84,14 @@ namespace WhatsYourFace.Core
             Guard.Argument(countryCode, nameof(countryCode)).NotNull().NotWhiteSpace();
             Guard.Argument(maxSimilarFaces, nameof(maxSimilarFaces)).InRange(1, 1000);
 
-            DetectedFace face = await this.DetectSingleFaceAsync(photo);
+            DetectedFace face = await this.DetectSingleFaceAsync(photo).ConfigureAwait(false);
             FaceCategory category = GetFaceCategory(face, countryCode);
 
             using (this.Logger.BeginScope(
                 new Dictionary<string, object> { { "gender", category.Gender } }))
             {
                 IEnumerable<FaceToNameMatch> matches
-                    = await this.MatchFaceToNameAsync(face, category, maxSimilarFaces);
+                    = await this.MatchFaceToNameAsync(face, category, maxSimilarFaces).ConfigureAwait(false);
 
                 FaceToNameMatchResult result = new FaceToNameMatchResult(category);
                 result.Matches.AddRange(matches);
@@ -111,7 +111,7 @@ namespace WhatsYourFace.Core
                 faceId,
                 faceListId: matchCategory.ToFaceListId(this.Settings.FaceListNameFormat),
                 maxNumOfCandidatesReturned: maxResults,
-                mode: FindSimilarMatchMode.MatchFace);
+                mode: FindSimilarMatchMode.MatchFace).ConfigureAwait(false);
         }
 
         private static FaceCategory GetFaceCategory(DetectedFace face, string countryCode)
@@ -128,7 +128,7 @@ namespace WhatsYourFace.Core
             int maxSimilarFaces)
         {
             IList<SimilarFace> similarFaces
-                = await this.FindSimilarFacesAsync(face.FaceId.Value, category, maxSimilarFaces);
+                = await this.FindSimilarFacesAsync(face.FaceId.Value, category, maxSimilarFaces).ConfigureAwait(false);
 
             this.Logger.LogInformation($"Retrieved {similarFaces.Count} similar faces.");
 

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="WhatsYourFace Rules" Description="Custom rules for WhatsYourFace" ToolsVersion="15.0">
+  <Include Path="codeanalysis.ruleset" Action="Default" />
+  <!-- https://github.com/dotnet/roslyn-analyzers/blob/master/src/Microsoft.CodeAnalysis.FxCopAnalyzers/Microsoft.CodeAnalysis.FxCopAnalyzers.md -->
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <Rule Id="CA2007" Action="None" />
+  </Rules>
+</RuleSet>

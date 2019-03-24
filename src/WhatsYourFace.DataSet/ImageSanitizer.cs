@@ -43,7 +43,7 @@ namespace WhatsYourFace.DataSet
                             stream,
                             returnFaceId: true,
                             returnFaceLandmarks: false,
-                            new[] { FaceAttributeType.Gender, FaceAttributeType.Age });
+                            new[] { FaceAttributeType.Gender, FaceAttributeType.Age }).ConfigureAwait(false);
 
                         Gender detectedGender = faces[0].FaceAttributes.Gender.Value;
 

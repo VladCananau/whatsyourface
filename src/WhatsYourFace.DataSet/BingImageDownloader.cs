@@ -53,7 +53,7 @@ namespace WhatsYourFace.DataSet
                 minWidth: 400,
                 imageContent: "Face",
                 imageType: "Photo",
-                safeSearch: "Strict");
+                safeSearch: "Strict").ConfigureAwait(false);
 
             IList<ImageObject> images = result.Value;
             string baseFileName = this.fileSystem.Path.Combine(directory, category.FirstName);
@@ -75,7 +75,7 @@ namespace WhatsYourFace.DataSet
                     if (i % maxParallelDownloads == maxParallelDownloads - 1
                         || i == images.Count - 1)
                     {
-                        await Task.WhenAll(downloads);
+                        await Task.WhenAll(downloads).ConfigureAwait(false);
                         downloads.Clear();
                     }
                 }
@@ -84,7 +84,7 @@ namespace WhatsYourFace.DataSet
             {
                 if (downloads.Count > 0)
                 {
-                    await Task.WhenAll(downloads);
+                    await Task.WhenAll(downloads).ConfigureAwait(false);
                 }
             }
         }

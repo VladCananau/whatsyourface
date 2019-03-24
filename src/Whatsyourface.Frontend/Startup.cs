@@ -4,6 +4,9 @@
 
 namespace WhatsYourFace.Frontend
 {
+    using System;
+    using System.Globalization;
+    using System.Linq;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -13,9 +16,6 @@ namespace WhatsYourFace.Frontend
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
-    using System;
-    using System.Globalization;
-    using System.Linq;
     using WhatsYourFace.Core;
     using WhatsYourFace.Frontend.ViewModels;
     using WhatsYourFace.Utilities;

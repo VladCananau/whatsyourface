@@ -39,7 +39,7 @@ namespace WhatsYourFace.Core.Tests
             this.mockFaceClient.Setup(mock => mock.Face).Returns(this.mockFaceOperations.Object);
             this.mockFaceClient.Setup(mock => mock.Dispose());
 
-            this.faceMatchSettings = 
+            this.faceMatchSettings =
                 new FaceMatchSettings() { FaceListNameFormat = "faces-{countrycode}-{gender}" };
 
             this.mockLogger = this.mockRepository.Create<ILogger<FaceMatcher>>(MockBehavior.Loose);

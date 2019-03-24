@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="WhatsYourFace Rules" Description="Custom rules for WhatsYourFace" ToolsVersion="15.0">
+  <Rules AnalyzerId="StyleCop.Analyzer" RuleNamespace="StyleCop.Analyzer">
+    <Rule Id="SA1652" Action="None" />
+  </Rules>
+</RuleSet>

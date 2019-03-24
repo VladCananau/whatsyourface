@@ -38,7 +38,5 @@ namespace WhatsYourFace.Core
         }
 
         public Codes ErrorCode { get; }
-
-
     }
 }

@@ -19,7 +19,7 @@ namespace WhatsYourFace.Core
     public class FaceMatcher : IFaceMatcher
     {
         private const int FindSimilarMaxNumberOfResults = 1000; // API limit
-        
+
         public FaceMatcher(
             IFaceClient faceClient,
             IFaceIdToNameLookup faceIdLookup,
@@ -90,7 +90,7 @@ namespace WhatsYourFace.Core
             using (this.Logger.BeginScope(
                 new Dictionary<string, object> { { "gender", category.Gender } }))
             {
-                IEnumerable<FaceToNameMatch> matches 
+                IEnumerable<FaceToNameMatch> matches
                     = await this.MatchFaceToNameAsync(face, category, maxSimilarFaces);
 
                 FaceToNameMatchResult result = new FaceToNameMatchResult(category);
@@ -117,7 +117,7 @@ namespace WhatsYourFace.Core
         private static FaceCategory GetFaceCategory(DetectedFace face, string countryCode)
         {
             Debug.Assert(face.FaceAttributes.Gender.HasValue, "Face detection did not return a Gender");
-            FaceCategory searchCategory 
+            FaceCategory searchCategory
                 = new FaceCategory(countryCode, face.FaceAttributes.Gender.Value.Convert());
             return searchCategory;
         }

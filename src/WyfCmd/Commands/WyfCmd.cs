@@ -1,4 +1,4 @@
-﻿// <copyright file="Program.cs" company="Vlad Ionut Cananau">
+﻿// <copyright file="WyfCmd.cs" company="Vlad Ionut Cananau">
 // Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 

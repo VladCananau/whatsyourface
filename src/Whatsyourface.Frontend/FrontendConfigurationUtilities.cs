@@ -1,4 +1,4 @@
-﻿// <copyright file="ConfigurationUtilities.cs" company="Vlad Ionut Cananau">
+﻿// <copyright file="FrontendConfigurationUtilities.cs" company="Vlad Ionut Cananau">
 // Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 

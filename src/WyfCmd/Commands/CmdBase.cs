@@ -1,5 +1,5 @@
-﻿// <copyright file="CmdBase.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="CmdBase.cs" company="Vlad Ionut Cananau">
+// Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 
 namespace WhatsYourFace.Wyfcmd.Commands
@@ -28,7 +28,9 @@ namespace WhatsYourFace.Wyfcmd.Commands
         protected IFileSystem FileSystem { get; }
     }
 
+#pragma warning disable SA1402 // File may only contain a single class
     public abstract class CmdBase<TArgs> : CmdBase
+#pragma warning restore SA1402 // File may only contain a single class
     {
         protected CmdBase(Wyfcmd.IConsole console, IFileSystem fileSystem)
             : base(console, fileSystem)
@@ -54,7 +56,9 @@ namespace WhatsYourFace.Wyfcmd.Commands
         public abstract Task ExecuteAsync(TArgs args);
     }
 
+#pragma warning disable SA1402 // File may only contain a single class
     public abstract class CmdBase<TArgs, TResult> : CmdBase
+#pragma warning restore SA1402 // File may only contain a single class
     {
         protected CmdBase(Wyfcmd.IConsole console, IFileSystem fileSystem)
             : base(console, fileSystem)

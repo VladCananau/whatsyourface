@@ -55,7 +55,7 @@ namespace WhatsYourFace.DataSet
                     PersistedFace persistedFace = await this.faceClient.FaceList.AddFaceFromStreamAsync(
                         faceListId,
                         stream,
-                        userData);
+                        userData).ConfigureAwait(false);
 
                     this.logger.LogDebug($"Added '{imageFile}' to FaceList '{faceListId}' with PersistedFaceId {persistedFace.PersistedFaceId}");
                     faceIds.Add(persistedFace.PersistedFaceId);

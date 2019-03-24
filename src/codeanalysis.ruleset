@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RuleSet Name="WhatsYourFace Rules" Description="Custom rules for WhatsYourFace" ToolsVersion="15.0">
+  <!-- https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md -->
   <Rules AnalyzerId="StyleCop.Analyzer" RuleNamespace="StyleCop.Analyzer">
     <Rule Id="SA1652" Action="None" />
   </Rules>

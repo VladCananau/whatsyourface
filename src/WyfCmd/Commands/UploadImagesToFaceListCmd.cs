@@ -1,5 +1,5 @@
-﻿// <copyright file="UploadImagesToFaceListCmd.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="UploadImagesToFaceListCmd.cs" company="Vlad Ionut Cananau">
+// Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 
 namespace WhatsYourFace.Wyfcmd.Commands
@@ -103,7 +103,6 @@ namespace WhatsYourFace.Wyfcmd.Commands
             if (this.FileSystem.Directory.Exists(directory))
             {
                 this.Console.WriteInformation($"Uploading photos from '{directory}'");
-
 
                 string userData = $"{args.CountryCode},{args.Gender},{name}";
 

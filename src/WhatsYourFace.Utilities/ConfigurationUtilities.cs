@@ -56,7 +56,7 @@ namespace WhatsYourFace.Utilities
 
         public static void ConfigureFaceClient(IServiceCollection services, IConfiguration config)
         {
-            FaceClientSettings settings = 
+            FaceClientSettings settings =
                 config.GetSection(FaceClientSettings).Get<FaceClientSettings>();
             services.AddSingleton<FaceClientSettings>(settings);
         }
@@ -89,7 +89,7 @@ namespace WhatsYourFace.Utilities
 
         public static void ConfigureFaceMatch(this IServiceCollection services, IConfiguration config)
         {
-            FaceMatchSettings settings = 
+            FaceMatchSettings settings =
                 config.GetSection(FaceMatchSettings).Get<FaceMatchSettings>();
             services.AddSingleton<FaceMatchSettings>(settings);
         }

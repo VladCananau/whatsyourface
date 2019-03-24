@@ -21,6 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WhatsYourFace.Core.Tests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WyfCmd", "WyfCmd\WyfCmd.csproj", "{EF7B1C69-A26B-4547-8171-09F75424E653}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F0119327-8638-441D-A9CC-F7F4DC36FB65}"
+	ProjectSection(SolutionItems) = preProject
+		codeanalysis.ruleset = codeanalysis.ruleset
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

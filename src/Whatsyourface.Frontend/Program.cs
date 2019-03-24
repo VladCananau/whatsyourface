@@ -38,7 +38,7 @@ namespace WhatsYourFace.Frontend
             // https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets
             if (!context.HostingEnvironment.IsDevelopment())
             {
-                // TODO (vladcananau): bad practice to build the config here 
+                // TODO (vladcananau): bad practice to build the config here
                 // https://github.com/aspnet/Docs/issues/11616
                 // Ideally we would want the AddAzureKeyVault to grab a well known
                 // KeyVault configuration section;

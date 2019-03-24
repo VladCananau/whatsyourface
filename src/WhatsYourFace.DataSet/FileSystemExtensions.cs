@@ -1,5 +1,5 @@
-﻿// <copyright file="FileUtilities.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="FileSystemExtensions.cs" company="Vlad Ionut Cananau">
+// Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 
 namespace WhatsYourFace.DataSet
@@ -11,12 +11,12 @@ namespace WhatsYourFace.DataSet
     public static class FileSystemExtensions
     {
         /// <summary>
-        /// Creates and deletes a file from an existing directory on disk. 
+        /// Creates and deletes a file from an existing directory on disk.
         /// </summary>
         /// <param name="fileSystem">The <see cref="IFileSystem"/> instance being extended.</param>
         /// <param name="dirPath">The directory path.</param>
         /// <param name="throwOnFailure">
-        /// If <c>true</c>, an exception will be thrown (allowed to bubble) when the operation fails. 
+        /// If <c>true</c>, an exception will be thrown (allowed to bubble) when the operation fails.
         /// Otherwise, the method will simply return <c>false</c>. Default is <c>false</c>.
         /// </param>
         /// <returns>true, if the operation was successful, false otherwise.</returns>

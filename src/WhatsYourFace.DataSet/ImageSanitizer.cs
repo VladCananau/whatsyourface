@@ -54,8 +54,8 @@ namespace WhatsYourFace.DataSet
                         }
                         else if (detectedGender.IsSameAs(expectedGender))
                         {
-                            this.logger.LogDebug
-                                ($"Removing '{imageFile}' because the detected gender '{detectedGender}' is not '{expectedGender}'");
+                            this.logger.LogDebug(
+                                $"Removing '{imageFile}' because the detected gender '{detectedGender}' is not '{expectedGender}'");
                         }
                         else
                         {

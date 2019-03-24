@@ -6,7 +6,6 @@ namespace WhatsYourFace.Models
 {
     using System;
 
-    [Flags]
     public enum FaceGender
     {
         None = 0,

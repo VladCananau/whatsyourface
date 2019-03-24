@@ -8,15 +8,16 @@ namespace WhatsYourFace.Models
 
     public class FaceCategory
     {
-        public string CountryCode { get; set; }
-        public FaceGender Gender { get; set; }
-
         public FaceCategory(string countryCode, FaceGender gender)
         {
             Guard.Argument(countryCode, nameof(countryCode)).NotNull().NotWhiteSpace();
             this.CountryCode = countryCode;
             this.Gender = gender;
         }
+
+        public string CountryCode { get; }
+
+        public FaceGender Gender { get; }
 
         public override bool Equals(object obj)
         {
@@ -31,8 +32,8 @@ namespace WhatsYourFace.Models
             unchecked
             {
                 int h = 11;
-                h = h * 2357 + this.CountryCode.GetHashCode();
-                h = h * 2357 + this.Gender.GetHashCode();
+                h = (h * 2357) + this.CountryCode.GetHashCode();
+                h = (h * 2357) + this.Gender.GetHashCode();
                 return h;
             }
         }

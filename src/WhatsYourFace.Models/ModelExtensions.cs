@@ -1,4 +1,4 @@
-﻿// <copyright file="ModelUtilities.cs" company="PlaceholderCompany">
+﻿// <copyright file="ModelExtensions.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -51,7 +51,7 @@ namespace WhatsYourFace.Models
         public static IEnumerable<FaceToNameMatch> AggregateMatchesByCountThenSum(this IEnumerable<FaceToNameMatch> matches)
         {
             // Every match will be worth 1 point + the value of its Score to the total score of the group
-            // This works well when Score is a 0-1 confidence metric; it is meant to discriminate between 
+            // This works well when Score is a 0-1 confidence metric; it is meant to discriminate between
             // groups of low confidence matches and groups of high confidence matches
             return
                 from match in matches

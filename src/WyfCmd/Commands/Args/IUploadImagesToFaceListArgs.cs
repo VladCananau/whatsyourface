@@ -1,5 +1,5 @@
-﻿// <copyright file="IUploadImagesToFaceListArgs.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="IUploadImagesToFaceListArgs.cs" company="Vlad Ionut Cananau">
+// Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 
 namespace WhatsYourFace.Wyfcmd.Commands

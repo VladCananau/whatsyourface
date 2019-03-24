@@ -1,4 +1,4 @@
-﻿// <copyright file="CannedExample.cs" company="Vlad Ionut Cananau">
+﻿// <copyright file="ICannedExample.cs" company="Vlad Ionut Cananau">
 // Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 

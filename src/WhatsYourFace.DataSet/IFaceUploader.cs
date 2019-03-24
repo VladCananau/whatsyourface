@@ -1,4 +1,4 @@
-﻿// <copyright file="FaceUploader.cs" company="Vlad Ionut Cananau">
+﻿// <copyright file="IFaceUploader.cs" company="Vlad Ionut Cananau">
 // Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 

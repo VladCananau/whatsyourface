@@ -21,10 +21,10 @@ namespace WhatsYourFace.Core
         {
             switch (detectedGender)
             {
-                case Gender.Male: { return FaceGender.Male; }
-                case Gender.Female: { return FaceGender.Female; }
-                default: { return FaceGender.None; }
-            };
+                case Gender.Male: return FaceGender.Male;
+                case Gender.Female: return FaceGender.Female;
+                default: return FaceGender.None;
+            }
         }
 
         public static string ToFaceListId(this FaceCategory category, string format)

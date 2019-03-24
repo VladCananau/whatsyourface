@@ -52,7 +52,6 @@ namespace WhatsYourFace.Wyfcmd
                     // TODO (vladcananau): watch this for attribute inheritance support
                     // https://github.com/adamabdelhamed/PowerArgs/issues/142
                     // await RunWithPowerArgs(args);
-
                     RunWithCommandLineParser(args);
                     logger.LogInformation("Command successful after: {duration}ms", timer.ElapsedMilliseconds);
                 }

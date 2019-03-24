@@ -4,8 +4,8 @@
 
 namespace WhatsYourFace.Frontend
 {
-    using Dawn;
     using System.Collections.Generic;
+    using Dawn;
 
     public class LocalizationSettings
     {

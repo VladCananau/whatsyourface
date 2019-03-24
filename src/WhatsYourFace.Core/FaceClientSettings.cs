@@ -1,4 +1,4 @@
-﻿// <copyright file="FaceClientOptions.cs" company="Vlad Ionut Cananau">
+﻿// <copyright file="FaceClientSettings.cs" company="Vlad Ionut Cananau">
 // Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 

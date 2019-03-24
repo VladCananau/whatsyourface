@@ -26,6 +26,7 @@ namespace WhatsYourFace.Core
                 default: return FaceGender.None;
             }
         }
+#pragma warning disable CA1308 // Normalize strings to uppercase
 
         public static string ToFaceListId(this FaceCategory category, string format)
         {
@@ -33,5 +34,7 @@ namespace WhatsYourFace.Core
                 .Replace("{countrycode}", category.CountryCode.ToLowerInvariant())
                 .Replace("{gender}", category.Gender.ToString().ToLowerInvariant());
         }
+
+#pragma warning restore CA1308 // Normalize strings to uppercase
     }
 }

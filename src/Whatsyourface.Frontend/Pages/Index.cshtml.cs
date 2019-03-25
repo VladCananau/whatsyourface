@@ -148,7 +148,7 @@ namespace WhatsYourFace.Frontend.Pages
                         .Single(example => this.ServerImageUrl.EndsWith(example.ImageFile, StringComparison.OrdinalIgnoreCase))
                         .Matches;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 this.Matches = null;
                 this.ErrorMessage = Resources.Index.ErrorNoImage;
@@ -178,8 +178,19 @@ namespace WhatsYourFace.Frontend.Pages
             }
             catch (FaceMatchException fmex)
             {
-                this.ErrorMessage = Resources.Index.ErrorMatchingFaceToName;
-                this.ErrorCode = nameof(Resources.Index.ErrorMatchingFaceToName);
+                if (fmex.ErrorCode == FaceMatchException.Code.MoreThanOneFaceInPhoto
+                    || fmex.ErrorCode == FaceMatchException.Code.ZeroFacesInPhoto)
+                {
+                    this.ErrorMessage = Resources.Index.ErrorMatchingFaceToName;
+                    this.ErrorCode = nameof(Resources.Index.ErrorMatchingFaceToName);
+                    this.LogUserError(this.ErrorCode, this.ErrorMessage);
+                }
+                else
+                {
+                    this.ErrorMessage = Resources.Index.ErrorInternal;
+                    this.ErrorCode = nameof(Resources.Index.ErrorInternal);
+                    this.LogServiceError(this.ErrorCode, this.ErrorMessage, fmex);
+                }
             }
             catch (Exception ex)
             {

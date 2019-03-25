@@ -7,20 +7,21 @@ namespace WhatsYourFace.Core
     using System;
     using System.Runtime.Serialization;
 
+#pragma warning disable CA1032 // Implement standard exception constructors; Codes are mandatory
     public class FaceMatchException : Exception
     {
-        public FaceMatchException(Codes errorCode)
+        public FaceMatchException(Code errorCode)
         {
             this.ErrorCode = errorCode;
         }
 
-        public FaceMatchException(Codes errorCode, string message)
+        public FaceMatchException(Code errorCode, string message)
             : base(message)
         {
             this.ErrorCode = errorCode;
         }
 
-        public FaceMatchException(Codes errorCode, string message, Exception innerException)
+        public FaceMatchException(Code errorCode, string message, Exception innerException)
             : base(message, innerException)
         {
             this.ErrorCode = errorCode;
@@ -31,12 +32,13 @@ namespace WhatsYourFace.Core
         {
         }
 
-        public enum Codes
+        public enum Code
         {
             ZeroFacesInPhoto,
             MoreThanOneFaceInPhoto,
         }
 
-        public Codes ErrorCode { get; }
+        public Code ErrorCode { get; }
     }
 }
+#pragma warning restore CA1032 // Implement standard exception constructors

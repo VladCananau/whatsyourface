@@ -19,7 +19,9 @@ namespace WhatsYourFace.Wyfcmd
     using WhatsYourFace.Utilities;
     using WhatsYourFace.Wyfcmd.Commands;
 
+#pragma warning disable CA1052 // Static holder types should be Static or NotInheritable; cannot because of ILogger<Program>
     public class Program
+#pragma warning restore CA1052 // Static holder types should be Static or NotInheritable
     {
         private static readonly string[] Environments = { "development", "production", "test1" };
 
@@ -73,8 +75,8 @@ namespace WhatsYourFace.Wyfcmd
 
         private static async Task RunWithPowerArgs(string[] args)
         {
-            Args.RegisterFactory(typeof(WyfCmd), () => new WyfCmd(serviceProvider));
-            await Args.InvokeActionAsync<WyfCmd>(args);
+            Args.RegisterFactory(typeof(CmdDispatcher), () => new CmdDispatcher(serviceProvider));
+            await Args.InvokeActionAsync<CmdDispatcher>(args);
         }
 
         private static void RunWithCommandLineParser(IEnumerable<string> args)
@@ -85,7 +87,7 @@ namespace WhatsYourFace.Wyfcmd
                 settings.HelpWriter = Console.Out;
             });
 
-            WyfCmd dispatcher = new WyfCmd(serviceProvider);
+            CmdDispatcher dispatcher = new CmdDispatcher(serviceProvider);
 
             // TODO (vladcananau): watch this for async support:
             // https://github.com/commandlineparser/commandline/pull/390

@@ -14,7 +14,7 @@ namespace WhatsYourFace.Frontend
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Logging.ApplicationInsights;
 
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

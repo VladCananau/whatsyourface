@@ -1,64 +1,61 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Moq;
-using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using WhatsYourFace.Core;
-using WhatsYourFace.Frontend.Pages;
-using WhatsYourFace.Frontend.ViewModels;
-using WhatsYourFace.Models;
-using Xunit;
+// <copyright file="IndexModelTests.cs" company="Vlad Ionut Cananau">
+// Copyright (c) Vlad Ionut Cananau. All rights reserved.
+// </copyright>
 
 namespace WhatsYourFace.Frontend.Tests.Pages
 {
-    public class IndexModelTests : IDisposable
-    {
-        private MockRepository mockRepository;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Logging;
+    using Moq;
+    using Shouldly;
+    using WhatsYourFace.Core;
+    using WhatsYourFace.Frontend.Pages;
+    using WhatsYourFace.Frontend.ViewModels;
+    using WhatsYourFace.Models;
+    using Xunit;
 
-        private FaceMatchSettings fakeFaceMatchSettings;
-        private Mock<IFaceMatcher> mockFaceMatcher;
-        private Mock<ICannedExample> mockCannedExample;
-        private Mock<IFormFile> mockUserImage;
-        private Mock<ILogger<IndexModel>> mockLogger;
+    public sealed class IndexModelTests : IDisposable
+    {
+        private readonly MockRepository mockRepository;
+
+        private readonly FaceMatchSettings fakeFaceMatchSettings;
+        private readonly Mock<IFaceMatcher> mockFaceMatcher;
+        private readonly Mock<ICannedExample> mockCannedExample;
+        private readonly Mock<IFormFile> mockUserImage;
+        private readonly Mock<ILogger<IndexModel>> mockLogger;
 
         public IndexModelTests()
         {
-            mockRepository = new MockRepository(MockBehavior.Strict);
+            this.mockRepository = new MockRepository(MockBehavior.Strict);
 
-            fakeFaceMatchSettings = new FaceMatchSettings();
-            fakeFaceMatchSettings.MaxNumberOfFaces = 10;
-            fakeFaceMatchSettings.MaxImageSizeInBytes = 1234;
-            fakeFaceMatchSettings.SupportedCountryCodes = new List<string> { "ro", "ru" };
+            this.fakeFaceMatchSettings = new FaceMatchSettings
+            {
+                MaxNumberOfFaces = 10,
+                MaxImageSizeInBytes = 1234,
+                SupportedCountryCodes = new List<string> { "ro", "ru" }
+            };
 
-            mockFaceMatcher = mockRepository.Create<IFaceMatcher>();
-            mockCannedExample = mockRepository.Create<ICannedExample>();
-            mockUserImage = mockRepository.Create<IFormFile>();
+            this.mockFaceMatcher = this.mockRepository.Create<IFaceMatcher>();
+            this.mockCannedExample = this.mockRepository.Create<ICannedExample>();
+            this.mockUserImage = this.mockRepository.Create<IFormFile>();
 
-            this.mockLogger = mockRepository.Create<ILogger<IndexModel>>(MockBehavior.Loose);
+            this.mockLogger = this.mockRepository.Create<ILogger<IndexModel>>(MockBehavior.Loose);
         }
 
         public void Dispose()
         {
-            mockRepository.VerifyAll();
-        }
-
-        private IndexModel CreateIndexModel()
-        {
-            return new IndexModel(
-                fakeFaceMatchSettings,
-                mockFaceMatcher.Object,
-                mockCannedExample.Object,
-                mockLogger.Object);
+            this.mockRepository.VerifyAll();
         }
 
         [Fact]
         public void HasResult_IsFalse()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.Matches = null;
             unitUnderTest.ErrorMessage = null;
 
@@ -73,7 +70,7 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public void HasResult_IsTrue_HasMatches()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.Matches = new List<FaceToNameMatchViewModel>();
             unitUnderTest.ErrorMessage = null;
 
@@ -88,7 +85,7 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public void HasResult_IsTrue_HasErrorMessage()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.Matches = null;
             unitUnderTest.ErrorMessage = "Big mistake";
 
@@ -103,11 +100,11 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public async Task OnPostAsync_CannedExample_Success()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.CountryCode = "ro";
             unitUnderTest.ServerImageUrl = "http://wyf.com/images/ex1.png";
             unitUnderTest.UserImage = null;
-            mockCannedExample.Setup(mock => mock.ExampleSets).Returns(BuildCannedExample().ExampleSets);
+            this.mockCannedExample.Setup(mock => mock.ExampleSets).Returns(this.BuildCannedExample().ExampleSets);
 
             // Act
             await unitUnderTest.OnPostAsync();
@@ -126,11 +123,11 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public async Task OnPostAsync_CannedExample_NotFound()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.CountryCode = "ru";
             unitUnderTest.ServerImageUrl = "http://wyf.com/images/wrong.png";
             unitUnderTest.UserImage = null;
-            mockCannedExample.Setup(mock => mock.ExampleSets).Returns(BuildCannedExample().ExampleSets);
+            this.mockCannedExample.Setup(mock => mock.ExampleSets).Returns(this.BuildCannedExample().ExampleSets);
 
             // Act
             await unitUnderTest.OnPostAsync();
@@ -145,16 +142,16 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         {
             // Arrange
             const string CountryCode = "ro";
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.CountryCode = CountryCode;
             unitUnderTest.ServerImageUrl = null;
-            unitUnderTest.UserImage = mockUserImage.Object;
-            this.SetupMockUserImage(mockUserImage);
+            unitUnderTest.UserImage = this.mockUserImage.Object;
+            this.SetupMockUserImage(this.mockUserImage);
 
             MemoryStream fakeImageStream = new MemoryStream();
-            mockUserImage.Setup(mock => mock.OpenReadStream()).Returns(fakeImageStream);
+            this.mockUserImage.Setup(mock => mock.OpenReadStream()).Returns(fakeImageStream);
 
-            FaceToNameMatchResult fakeResult = 
+            FaceToNameMatchResult fakeResult =
                 new FaceToNameMatchResult(new FaceCategory(CountryCode, FaceGender.Male));
             fakeResult.Matches.AddRange(new[]
             {
@@ -162,9 +159,9 @@ namespace WhatsYourFace.Frontend.Tests.Pages
                 new FaceToNameMatch("Tiberiu", 28.5)
             });
 
-            mockFaceMatcher
+            this.mockFaceMatcher
                 .Setup(mock => mock.MatchFaceToNameAsync(
-                    fakeImageStream, CountryCode, fakeFaceMatchSettings.MaxNumberOfFaces))
+                    fakeImageStream, CountryCode, this.fakeFaceMatchSettings.MaxNumberOfFaces))
                 .Returns(Task.FromResult(fakeResult));
 
             // Act
@@ -184,11 +181,11 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public async Task OnPostAsync_UserImage_Success_NormalizeResults()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.CountryCode = "ru";
             unitUnderTest.ServerImageUrl = null;
-            unitUnderTest.UserImage = mockUserImage.Object;
-            this.SetupMockUserImage(mockUserImage);
+            unitUnderTest.UserImage = this.mockUserImage.Object;
+            this.SetupMockUserImage(this.mockUserImage);
 
             FaceToNameMatchResult fakeResult =
                 new FaceToNameMatchResult(new FaceCategory("ru", FaceGender.Female));
@@ -198,7 +195,7 @@ namespace WhatsYourFace.Frontend.Tests.Pages
                 new FaceToNameMatch("Second", 0.80)
             });
 
-            mockFaceMatcher
+            this.mockFaceMatcher
                 .Setup(mock => mock.MatchFaceToNameAsync(It.IsAny<Stream>(), It.IsAny<string>(), It.IsAny<int>()))
                 .Returns(Task.FromResult(fakeResult));
 
@@ -216,15 +213,15 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public async Task OnPostAsync_UserImage_FaceMatchException()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.CountryCode = "ro";
             unitUnderTest.ServerImageUrl = null;
-            unitUnderTest.UserImage = mockUserImage.Object;
-            this.SetupMockUserImage(mockUserImage);
+            unitUnderTest.UserImage = this.mockUserImage.Object;
+            this.SetupMockUserImage(this.mockUserImage);
 
-            mockFaceMatcher
+            this.mockFaceMatcher
                 .Setup(mock => mock.MatchFaceToNameAsync(It.IsAny<Stream>(), It.IsAny<string>(), It.IsAny<int>()))
-                .Throws(new FaceMatchException(FaceMatchException.Codes.ZeroFacesInPhoto, "Matching went pear-shaped"));
+                .Throws(new FaceMatchException(FaceMatchException.Code.ZeroFacesInPhoto, "Matching went pear-shaped"));
 
             // Act
             await unitUnderTest.OnPostAsync();
@@ -238,13 +235,13 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public async Task OnPostAsync_UserImage_InternalException()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.CountryCode = "ru";
             unitUnderTest.ServerImageUrl = null;
-            unitUnderTest.UserImage = mockUserImage.Object;
-            this.SetupMockUserImage(mockUserImage);
+            unitUnderTest.UserImage = this.mockUserImage.Object;
+            this.SetupMockUserImage(this.mockUserImage);
 
-            mockFaceMatcher
+            this.mockFaceMatcher
                 .Setup(mock => mock.MatchFaceToNameAsync(It.IsAny<Stream>(), It.IsAny<string>(), It.IsAny<int>()))
                 .Throws(new Exception("Something stupid like 'I love you'"));
 
@@ -260,7 +257,7 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public async Task OnPostAsync_Error_NoCountryCode()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.CountryCode = string.Empty;
             unitUnderTest.ServerImageUrl = "http://wyf.com/images/ex1.png";
             unitUnderTest.UserImage = null;
@@ -277,7 +274,7 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public async Task OnPostAsync_Error_NoImage()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.CountryCode = "ro";
             unitUnderTest.ServerImageUrl = string.Empty;
             unitUnderTest.UserImage = null;
@@ -294,7 +291,7 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         public async Task OnPostAsync_Error_CountryCodeNotSupported()
         {
             // Arrange
-            IndexModel unitUnderTest = CreateIndexModel();
+            IndexModel unitUnderTest = this.CreateIndexModel();
             unitUnderTest.CountryCode = "xy";
             unitUnderTest.ServerImageUrl = "http://wyf.com/images/ex1.png";
             unitUnderTest.UserImage = null;
@@ -311,12 +308,12 @@ namespace WhatsYourFace.Frontend.Tests.Pages
         {
             ExampleSets = new[]
             {
-                new CannedExample.ExampleSet
+                new ExampleSet
                 {
                     CountryCode = "ru",
                     Examples = new[]
                     {
-                        new CannedExample.Example
+                        new Example
                         {
                             ImageFile = "ex1.png",
                             Matches = new[]
@@ -327,12 +324,12 @@ namespace WhatsYourFace.Frontend.Tests.Pages
                         }
                     }
                 },
-                new CannedExample.ExampleSet
+                new ExampleSet
                 {
                     CountryCode = "ro",
                     Examples = new[]
                     {
-                        new CannedExample.Example
+                        new Example
                         {
                             ImageFile = "ex1.png",
                             Matches = new[]
@@ -341,7 +338,7 @@ namespace WhatsYourFace.Frontend.Tests.Pages
                                 new FaceToNameMatchViewModel("Gheorghe", 21.84)
                             }
                         },
-                        new CannedExample.Example
+                        new Example
                         {
                             ImageFile = "ex2.jpg",
                             Matches = new[]
@@ -360,6 +357,15 @@ namespace WhatsYourFace.Frontend.Tests.Pages
             mockImage.SetupGet(mock => mock.Length).Returns(10);
             Stream fakeStream = Stream.Null;
             mockImage.Setup(mock => mock.OpenReadStream()).Returns(fakeStream);
+        }
+
+        private IndexModel CreateIndexModel()
+        {
+            return new IndexModel(
+                this.fakeFaceMatchSettings,
+                this.mockFaceMatcher.Object,
+                this.mockCannedExample.Object,
+                this.mockLogger.Object);
         }
     }
 }

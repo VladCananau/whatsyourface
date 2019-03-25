@@ -20,6 +20,14 @@ namespace WhatsYourFace.Core
     {
         private const int FindSimilarMaxNumberOfResults = 1000; // API limit
 
+        private readonly IFaceClient faceClient;
+
+        private readonly FaceMatchSettings settings;
+
+        private readonly ILogger<FaceMatcher> logger;
+
+        private readonly IFaceIdToNameLookup faceIdLookup;
+
         public FaceMatcher(
             IFaceClient faceClient,
             IFaceIdToNameLookup faceIdLookup,
@@ -29,30 +37,24 @@ namespace WhatsYourFace.Core
             Guard.Argument(faceClient, nameof(faceClient)).NotNull();
             Guard.Argument(settings, nameof(settings)).NotNull();
             Guard.Argument(logger, nameof(logger)).NotNull();
+            Guard.Argument(faceIdLookup, nameof(faceIdLookup)).NotNull();
 
-            this.FaceClient = faceClient;
-            this.FaceIdLookup = faceIdLookup;
-            this.Settings = settings;
-            this.Logger = logger;
+            this.faceClient = faceClient;
+            this.faceIdLookup = faceIdLookup;
+            this.settings = settings;
+            this.logger = logger;
         }
-
-        protected IFaceClient FaceClient { get; }
-
-        protected FaceMatchSettings Settings { get; }
-
-        protected ILogger<FaceMatcher> Logger { get; }
-
-        protected IFaceIdToNameLookup FaceIdLookup { get; }
 
         public void Dispose()
         {
-            this.FaceClient.Dispose();
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public async Task<DetectedFace> DetectSingleFaceAsync(Stream photo)
         {
             IList<DetectedFace> faces
-                = await this.FaceClient.Face.DetectWithStreamAsync(
+                = await this.faceClient.Face.DetectWithStreamAsync(
                             photo,
                             returnFaceId: true,
                             returnFaceLandmarks: false,
@@ -61,14 +63,14 @@ namespace WhatsYourFace.Core
             if (faces.Count() != 1)
             {
                 var exceptionCode = faces.Count == 0
-                    ? FaceMatchException.Codes.ZeroFacesInPhoto
-                    : FaceMatchException.Codes.MoreThanOneFaceInPhoto;
+                    ? FaceMatchException.Code.ZeroFacesInPhoto
+                    : FaceMatchException.Code.MoreThanOneFaceInPhoto;
                 throw new FaceMatchException(
                     exceptionCode,
                     $"The image contains {faces.Count()} faces instead of 1");
             }
 
-            this.Logger.LogInformation(
+            this.logger.LogInformation(
                 "Detected a {gender} face with faceId '{faceId}'",
                 faces[0].FaceAttributes.Gender,
                 faces[0].FaceId);
@@ -87,7 +89,7 @@ namespace WhatsYourFace.Core
             DetectedFace face = await this.DetectSingleFaceAsync(photo).ConfigureAwait(false);
             FaceCategory category = GetFaceCategory(face, countryCode);
 
-            using (this.Logger.BeginScope(
+            using (this.logger.BeginScope(
                 new Dictionary<string, object> { { "gender", category.Gender } }))
             {
                 IEnumerable<FaceToNameMatch> matches
@@ -99,6 +101,17 @@ namespace WhatsYourFace.Core
             }
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this.faceClient != null)
+                {
+                    this.faceClient.Dispose();
+                }
+            }
+        }
+
         protected async Task<IList<SimilarFace>> FindSimilarFacesAsync(
             Guid faceId,
             FaceCategory matchCategory,
@@ -107,9 +120,9 @@ namespace WhatsYourFace.Core
             Guard.Argument(matchCategory, nameof(matchCategory)).NotNull();
             Guard.Argument(maxResults, nameof(maxResults)).InRange(1, FindSimilarMaxNumberOfResults);
 
-            return await this.FaceClient.Face.FindSimilarAsync(
+            return await this.faceClient.Face.FindSimilarAsync(
                 faceId,
-                faceListId: matchCategory.ToFaceListId(this.Settings.FaceListNameFormat),
+                faceListId: matchCategory.ToFaceListId(this.settings.FaceListNameFormat),
                 maxNumOfCandidatesReturned: maxResults,
                 mode: FindSimilarMatchMode.MatchFace).ConfigureAwait(false);
         }
@@ -122,21 +135,7 @@ namespace WhatsYourFace.Core
             return searchCategory;
         }
 
-        private async Task<IEnumerable<FaceToNameMatch>> MatchFaceToNameAsync(
-            DetectedFace face,
-            FaceCategory category,
-            int maxSimilarFaces)
-        {
-            IList<SimilarFace> similarFaces
-                = await this.FindSimilarFacesAsync(face.FaceId.Value, category, maxSimilarFaces).ConfigureAwait(false);
-
-            this.Logger.LogInformation($"Retrieved {similarFaces.Count} similar faces.");
-
-            IEnumerable<FaceToNameMatch> matches = this.ConvertFaceIdsToNames(similarFaces, category, this.FaceIdLookup);
-            return matches;
-        }
-
-        private IList<FaceToNameMatch> ConvertFaceIdsToNames(
+        private static IList<FaceToNameMatch> ConvertFaceIdsToNames(
             IList<SimilarFace> similarFaces,
             FaceCategory lookupCategory,
             IFaceIdToNameLookup faceIdLookup)
@@ -148,6 +147,20 @@ namespace WhatsYourFace.Core
                     score: result.Confidence);
 
             return converted.ToList();
+        }
+
+        private async Task<IEnumerable<FaceToNameMatch>> MatchFaceToNameAsync(
+            DetectedFace face,
+            FaceCategory category,
+            int maxSimilarFaces)
+        {
+            IList<SimilarFace> similarFaces
+                = await this.FindSimilarFacesAsync(face.FaceId.Value, category, maxSimilarFaces).ConfigureAwait(false);
+
+            this.logger.LogInformation($"Retrieved {similarFaces.Count} similar faces.");
+
+            IEnumerable<FaceToNameMatch> matches = ConvertFaceIdsToNames(similarFaces, category, this.faceIdLookup);
+            return matches;
         }
     }
 }

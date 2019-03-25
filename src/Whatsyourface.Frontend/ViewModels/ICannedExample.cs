@@ -10,35 +10,6 @@ namespace WhatsYourFace.Frontend.ViewModels
 
     public interface ICannedExample
     {
-        IList<CannedExample.ExampleSet> ExampleSets { get; set; }
-    }
-
-    public class CannedExample : ICannedExample
-    {
-        [DataMember(Name = "exampleSets")]
-        public IList<ExampleSet> ExampleSets { get; set; }
-
-        public static ICannedExample Deserialize(string jsonContent)
-        {
-            return JsonConvert.DeserializeObject<CannedExample>(jsonContent);
-        }
-
-        public class ExampleSet
-        {
-            [DataMember(Name = "countryCode")]
-            public string CountryCode { get; set; }
-
-            [DataMember(Name = "examples")]
-            public IList<Example> Examples { get; set; }
-        }
-
-        public class Example
-        {
-            [DataMember(Name = "imageFile")]
-            public string ImageFile { get; set; }
-
-            [DataMember(Name = "matches")]
-            public IList<FaceToNameMatchViewModel> Matches { get; set; }
-        }
+        IList<ExampleSet> ExampleSets { get; }
     }
 }

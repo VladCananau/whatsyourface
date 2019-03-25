@@ -7,6 +7,7 @@ namespace WhatsYourFace.Frontend.Pages
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -46,14 +47,18 @@ namespace WhatsYourFace.Frontend.Pages
         [BindProperty]
         public IFormFile UserImage { get; set; }
 
+#pragma warning disable CA2227 // Collection properties should be read only; Binding property
         [BindProperty]
         public IList<FaceToNameMatchViewModel> Matches { get; set; }
+#pragma warning restore CA2227 // Collection properties should be read only
 
         [BindProperty]
         public string ErrorMessage { get; set; }
 
         [BindProperty]
+#pragma warning disable CA1056 // Uri properties should not be strings; Binding property
         public string ServerImageUrl { get; set; }
+#pragma warning restore CA1056 // Uri properties should not be strings
 
         public FaceMatchSettings FaceMatchSettings { get; }
 
@@ -62,10 +67,6 @@ namespace WhatsYourFace.Frontend.Pages
         public bool HasResult()
         {
             return this.Matches != null || this.ErrorMessage != null;
-        }
-
-        public void OnGet()
-        {
         }
 
         public async Task OnPostAsync()
@@ -83,7 +84,9 @@ namespace WhatsYourFace.Frontend.Pages
                 }
                 else if (!this.IsCountryCodeSupported())
                 {
-                    this.ErrorMessage = string.Format(Resources.Index.ErrorCountryNotSupported, this.CountryCode);
+                    this.ErrorMessage = string.Format(
+                        Resources.Index.ErrorCountryNotSupported,
+                        this.CountryCode);
                     this.ErrorCode = nameof(Resources.Index.ErrorCountryNotSupported);
                 }
                 else if (this.IsImageMissing())
@@ -169,7 +172,7 @@ namespace WhatsYourFace.Frontend.Pages
                             .ToList()
                             .NormalizeScoresAsProbabilitySpaceInPercentages()
                             .Take(3)
-                            .Select(match => (FaceToNameMatchViewModel)match)
+                            .Select(FaceToNameMatchViewModel.FromFaceToNameMatch)
                             .ToList();
                 }
             }
@@ -212,7 +215,7 @@ namespace WhatsYourFace.Frontend.Pages
 
         private void LogError(string errorCode, string errorMessage, string errorType, Exception ex = null)
         {
-            this.logger.LogError(ex, "{outcome} ({errorCode}): {errorMessage}", errorType, this.ErrorCode, this.ErrorMessage);
+            this.logger.LogError(ex, "{outcome} ({errorCode}): {errorMessage}", errorType, errorCode, errorMessage);
         }
     }
 }

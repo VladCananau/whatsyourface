@@ -2,6 +2,14 @@
 <RuleSet Name="WhatsYourFace Rules" Description="Custom rules for WhatsYourFace" ToolsVersion="15.0">
   <!-- https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md -->
   <Rules AnalyzerId="StyleCop.Analyzer" RuleNamespace="StyleCop.Analyzer">
+  <!-- do not require XML documentation output https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1652.md -->
     <Rule Id="SA1652" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
+    <!-- 
+	Excessive, as it applies only when formatting dates, numbers and currencies 
+	https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1305-specify-iformatprovider?view=vs-2017 
+	-->
+	<Rule Id="CA1305" Action="None" />
   </Rules>
 </RuleSet>

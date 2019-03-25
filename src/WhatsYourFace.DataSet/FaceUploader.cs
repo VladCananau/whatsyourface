@@ -32,7 +32,8 @@ namespace WhatsYourFace.DataSet
 
         public void Dispose()
         {
-            this.faceClient.Dispose();
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public async Task<IList<Guid>> UploadPhotosToFaceList(string directory, int count, int skip, string faceListId, string userData)
@@ -63,6 +64,17 @@ namespace WhatsYourFace.DataSet
             }
 
             return faceIds;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this.faceClient != null)
+                {
+                    this.faceClient.Dispose();
+                }
+            }
         }
 
         private static bool IsSameGender(Gender detectedGender, FaceGender statedGender)

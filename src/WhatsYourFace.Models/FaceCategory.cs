@@ -4,14 +4,18 @@
 
 namespace WhatsYourFace.Models
 {
+    using System;
     using Dawn;
 
     public class FaceCategory
     {
+        private readonly string countryCodeNormalized;
+
         public FaceCategory(string countryCode, FaceGender gender)
         {
             Guard.Argument(countryCode, nameof(countryCode)).NotNull().NotWhiteSpace();
             this.CountryCode = countryCode;
+            this.countryCodeNormalized = countryCode.ToUpperInvariant();
             this.Gender = gender;
         }
 
@@ -21,9 +25,8 @@ namespace WhatsYourFace.Models
 
         public override bool Equals(object obj)
         {
-            FaceCategory other = obj as FaceCategory;
-            return other != null
-                && string.Equals(other.CountryCode, this.CountryCode)
+            return obj is FaceCategory other
+                && string.Equals(other.CountryCode, this.CountryCode, StringComparison.OrdinalIgnoreCase)
                 && other.Gender == this.Gender;
         }
 
@@ -32,7 +35,7 @@ namespace WhatsYourFace.Models
             unchecked
             {
                 int h = 11;
-                h = (h * 2357) + this.CountryCode.GetHashCode();
+                h = (h * 2357) + this.countryCodeNormalized.GetHashCode();
                 h = (h * 2357) + this.Gender.GetHashCode();
                 return h;
             }

@@ -10,8 +10,5 @@ namespace WhatsYourFace.Frontend.Pages
     public class PrivacyModel : PageModel
 #pragma warning restore SA1649 // File name must match first type name
     {
-        public void OnGet()
-        {
-        }
     }
 }

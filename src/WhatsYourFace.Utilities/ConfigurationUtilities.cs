@@ -45,8 +45,10 @@ namespace WhatsYourFace.Utilities
 
                 ImageSearchClient searchClient = new ImageSearchClient(
                     new Microsoft.Azure.CognitiveServices.Search.ImageSearch.ApiKeyServiceClientCredentials(settings.SubscriptionKey),
-                    new System.Net.Http.DelegatingHandler[] { });
-                searchClient.Endpoint = settings.Endpoint;
+                    System.Array.Empty<System.Net.Http.DelegatingHandler>())
+                {
+                    Endpoint = settings.Endpoint
+                };
 
                 return searchClient;
             });
@@ -71,8 +73,10 @@ namespace WhatsYourFace.Utilities
 
                 FaceClient faceClient = new FaceClient(
                     new Microsoft.Azure.CognitiveServices.Vision.Face.ApiKeyServiceClientCredentials(settings.SubscriptionKey),
-                    new System.Net.Http.DelegatingHandler[] { });
-                faceClient.Endpoint = settings.Endpoint;
+                    System.Array.Empty<System.Net.Http.DelegatingHandler>())
+                {
+                    Endpoint = settings.Endpoint
+                };
 
                 return faceClient;
             });
@@ -82,8 +86,8 @@ namespace WhatsYourFace.Utilities
 
         public static void AddFaceIdLookup(this IServiceCollection services, IConfiguration config)
         {
-            MemoryFaceIdToNameLookup.CsvSettings settings =
-                config.GetSection(FaceIdLookupSettings).Get<MemoryFaceIdToNameLookup.CsvSettings>();
+            FaceIdToNameCsvSourceSettings settings =
+                config.GetSection(FaceIdLookupSettings).Get<FaceIdToNameCsvSourceSettings>();
             services.AddSingleton<IFaceIdToNameLookup>(MemoryFaceIdToNameLookup.FromCsvFile(settings));
         }
 

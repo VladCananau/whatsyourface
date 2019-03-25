@@ -20,13 +20,13 @@ namespace WhatsYourFace.Core.Tests
 
     public class FaceMatcherTests
     {
-        private MockRepository mockRepository;
-        private FaceMatchSettings faceMatchSettings;
+        private readonly MockRepository mockRepository;
+        private readonly FaceMatchSettings faceMatchSettings;
 
-        private Mock<IFaceIdToNameLookup> mockFaceIdLookup;
-        private Mock<IFaceClient> mockFaceClient;
-        private Mock<IFaceOperations> mockFaceOperations;
-        private Mock<ILogger<FaceMatcher>> mockLogger;
+        private readonly Mock<IFaceIdToNameLookup> mockFaceIdLookup;
+        private readonly Mock<IFaceClient> mockFaceClient;
+        private readonly Mock<IFaceOperations> mockFaceOperations;
+        private readonly Mock<ILogger<FaceMatcher>> mockLogger;
 
         public FaceMatcherTests()
         {
@@ -74,11 +74,15 @@ namespace WhatsYourFace.Core.Tests
             var unitUnderTest = this.CreateFaceMatcher();
             Stream photo = new MemoryStream();
 
-            DetectedFace expected = new DetectedFace();
-            expected.FaceId = Guid.NewGuid();
-            expected.FaceAttributes = new FaceAttributes(gender: Gender.Female);
-            var response = new Microsoft.Rest.HttpOperationResponse<IList<DetectedFace>>();
-            response.Body = new[] { expected };
+            DetectedFace expected = new DetectedFace
+            {
+                FaceId = Guid.NewGuid(),
+                FaceAttributes = new FaceAttributes(gender: Gender.Female)
+            };
+            var response = new Microsoft.Rest.HttpOperationResponse<IList<DetectedFace>>
+            {
+                Body = new[] { expected }
+            };
 
             this.mockFaceOperations
                 .Setup(mock => mock.DetectWithStreamWithHttpMessagesAsync(
@@ -105,8 +109,10 @@ namespace WhatsYourFace.Core.Tests
             // Arrange
             var unitUnderTest = this.CreateFaceMatcher();
 
-            var response = new HttpOperationResponse<IList<DetectedFace>>();
-            response.Body = new DetectedFace[0];
+            var response = new HttpOperationResponse<IList<DetectedFace>>
+            {
+                Body = Array.Empty<DetectedFace>()
+            };
 
             this.mockFaceOperations
                 .SetupDefaultDetectWithStreamWithHttpMessagesAsync()
@@ -116,7 +122,7 @@ namespace WhatsYourFace.Core.Tests
             FaceMatchException ex = await Should.ThrowAsync<FaceMatchException>(
                 async () => await unitUnderTest.DetectSingleFaceAsync(Stream.Null));
             ex.Message.ShouldNotBeNullOrWhiteSpace();
-            ex.ErrorCode.ShouldBe(FaceMatchException.Codes.ZeroFacesInPhoto);
+            ex.ErrorCode.ShouldBe(FaceMatchException.Code.ZeroFacesInPhoto);
         }
 
         [Fact]
@@ -125,8 +131,10 @@ namespace WhatsYourFace.Core.Tests
             // Arrange
             var unitUnderTest = this.CreateFaceMatcher();
 
-            var response = new HttpOperationResponse<IList<DetectedFace>>();
-            response.Body = new[] { new DetectedFace(), new DetectedFace() };
+            var response = new HttpOperationResponse<IList<DetectedFace>>
+            {
+                Body = new[] { new DetectedFace(), new DetectedFace() }
+            };
 
             this.mockFaceOperations
                 .SetupDefaultDetectWithStreamWithHttpMessagesAsync()
@@ -135,8 +143,10 @@ namespace WhatsYourFace.Core.Tests
             // Act
             FaceMatchException ex = await Should.ThrowAsync<FaceMatchException>(
                 async () => await unitUnderTest.DetectSingleFaceAsync(Stream.Null));
+
+            // Assert
             ex.Message.ShouldNotBeNullOrWhiteSpace();
-            ex.ErrorCode.ShouldBe(FaceMatchException.Codes.MoreThanOneFaceInPhoto);
+            ex.ErrorCode.ShouldBe(FaceMatchException.Code.MoreThanOneFaceInPhoto);
         }
 
         [Fact]
@@ -149,11 +159,15 @@ namespace WhatsYourFace.Core.Tests
             int maxSimilarFaces = 10;
 
             Guid fakeFaceId = Guid.NewGuid();
-            DetectedFace fakeDetectedFace = new DetectedFace();
-            fakeDetectedFace.FaceId = fakeFaceId;
-            fakeDetectedFace.FaceAttributes = new FaceAttributes(gender: Gender.Female);
-            var detectFaceResponse = new HttpOperationResponse<IList<DetectedFace>>();
-            detectFaceResponse.Body = new[] { fakeDetectedFace };
+            DetectedFace fakeDetectedFace = new DetectedFace
+            {
+                FaceId = fakeFaceId,
+                FaceAttributes = new FaceAttributes(gender: Gender.Female)
+            };
+            var detectFaceResponse = new HttpOperationResponse<IList<DetectedFace>>
+            {
+                Body = new[] { fakeDetectedFace }
+            };
 
             this.mockFaceOperations
                 .Setup(mock => mock.DetectWithStreamWithHttpMessagesAsync(
@@ -174,8 +188,10 @@ namespace WhatsYourFace.Core.Tests
                 new SimilarFace() { PersistedFaceId = fakePersistedFaceId2, Confidence = 0.4321 },
             };
 
-            var findSimilarResponse = new HttpOperationResponse<IList<SimilarFace>>();
-            findSimilarResponse.Body = fakeSimilarFaces;
+            var findSimilarResponse = new HttpOperationResponse<IList<SimilarFace>>
+            {
+                Body = fakeSimilarFaces
+            };
 
             this.mockFaceOperations
                 .Setup(mock => mock.FindSimilarWithHttpMessagesAsync(

@@ -11,7 +11,9 @@ namespace WhatsYourFace.Frontend
     {
         public string CultureCookieName { get; set; }
 
+#pragma warning disable CA2227 // Collection properties should be read only; Deserialization
         public List<string> SupportedCultures { get; set; }
+#pragma warning restore CA2227 // Collection properties should be read only
 
         public string DefaultCulture { get; set; }
 

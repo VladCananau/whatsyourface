@@ -1,4 +1,4 @@
-﻿// <copyright file="WyfCmd.cs" company="Vlad Ionut Cananau">
+﻿// <copyright file="CmdDispatcher.cs" company="Vlad Ionut Cananau">
 // Copyright (c) Vlad Ionut Cananau. All rights reserved.
 // </copyright>
 
@@ -13,12 +13,12 @@ namespace WhatsYourFace.Wyfcmd
     using WhatsYourFace.Wyfcmd.Commands;
 
     [ArgExceptionBehavior(ArgExceptionPolicy.StandardExceptionHandling)]
-    public class WyfCmd
+    public class CmdDispatcher
     {
         private readonly IServiceProvider serviceProvider;
         private readonly IConsole console;
 
-        public WyfCmd(IServiceProvider serviceProvider)
+        public CmdDispatcher(IServiceProvider serviceProvider)
         {
             Guard.Argument(serviceProvider, nameof(serviceProvider)).NotNull();
             this.serviceProvider = serviceProvider;

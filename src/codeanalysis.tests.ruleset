@@ -1,8 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="WhatsYourFace Rules" Description="Custom rules for WhatsYourFace" ToolsVersion="15.0">
+<RuleSet Name="WhatsYourFace Rules" Description="Custom rules for WhatsYourFace Test projects" ToolsVersion="15.0">
   <Include Path="codeanalysis.ruleset" Action="Default" />
   <!-- https://github.com/dotnet/roslyn-analyzers/blob/master/src/Microsoft.CodeAnalysis.FxCopAnalyzers/Microsoft.CodeAnalysis.FxCopAnalyzers.md -->
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
-    <Rule Id="CA2007" Action="None" />
+    <!-- do not require ConfigureAwait(false) -->
+	<Rule Id="CA2007" Action="None" />
+	<!-- https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1707-identifiers-should-not-contain-underscores?view=vs-2017 -->
+	<Rule Id="CA1707" Action="None" />
   </Rules>
+  <!-- <Rules AnalyzerId="RefactoringEssentials" RuleNamespace="RefactoringEssentials"> -->
+    <!-- <Rule Id="RECS0154" Action="None" /> -->
+  <!-- </Rules> -->
 </RuleSet>

@@ -18,7 +18,7 @@ namespace WhatsYourFace.Core
         {
         }
 
-        public static MemoryFaceIdToNameLookup FromCsvFile(CsvSettings settings)
+        public static MemoryFaceIdToNameLookup FromCsvFile(FaceIdToNameCsvSourceSettings settings)
         {
             Guard.Argument(settings, nameof(settings)).NotNull();
             Guard.Argument(settings.CsvFilePath, nameof(settings.CsvFilePath)).NotWhiteSpace();
@@ -31,7 +31,7 @@ namespace WhatsYourFace.Core
             }
         }
 
-        public static MemoryFaceIdToNameLookup FromCsvStream(TextReader csvReader, CsvSettings settings)
+        public static MemoryFaceIdToNameLookup FromCsvStream(TextReader csvReader, FaceIdToNameCsvSourceSettings settings)
         {
             Guard.Argument(csvReader, nameof(csvReader)).NotNull();
             Guard.Argument(settings, nameof(settings)).NotNull();
@@ -59,7 +59,7 @@ namespace WhatsYourFace.Core
             return this.dictionary[persistedFaceId];
         }
 
-        private static void AddLineToResult(string csvLine, MemoryFaceIdToNameLookup result, CsvSettings settings)
+        private static void AddLineToResult(string csvLine, MemoryFaceIdToNameLookup result, FaceIdToNameCsvSourceSettings settings)
         {
             string[] entry = csvLine.Split(',');
 
@@ -73,33 +73,22 @@ namespace WhatsYourFace.Core
             result.dictionary.Add(Guid.Parse(entry[settings.FaceIdIndex]), entry[settings.NameIndex]);
         }
 
-        private static int GetCurrentLine(MemoryFaceIdToNameLookup result, CsvSettings settings)
+        private static int GetCurrentLine(MemoryFaceIdToNameLookup result, FaceIdToNameCsvSourceSettings settings)
         {
             return result.dictionary.Count + (settings.HasHeaderRow ? 1 : 0);
         }
 
-        private static int GetExpectedColumns(CsvSettings settings)
+        private static int GetExpectedColumns(FaceIdToNameCsvSourceSettings settings)
         {
             return Math.Max(settings.FaceIdIndex, settings.NameIndex) + 1; // +1 because zero-index
         }
 
-        private static void SkipHeaderRow(TextReader csvReader, CsvSettings settings)
+        private static void SkipHeaderRow(TextReader csvReader, FaceIdToNameCsvSourceSettings settings)
         {
             if (settings.HasHeaderRow)
             {
                 csvReader.ReadLine();
             }
-        }
-
-        public class CsvSettings
-        {
-            public string CsvFilePath { get; set; }
-
-            public int FaceIdIndex { get; set; }
-
-            public int NameIndex { get; set; }
-
-            public bool HasHeaderRow { get; set; }
         }
     }
 }

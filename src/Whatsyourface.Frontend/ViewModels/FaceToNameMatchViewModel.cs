@@ -18,9 +18,9 @@ namespace WhatsYourFace.Frontend.ViewModels
 
         public double Score { get; set; }
 
-        public static implicit operator FaceToNameMatchViewModel(FaceToNameMatch obj)
+        public static FaceToNameMatchViewModel FromFaceToNameMatch(FaceToNameMatch source)
         {
-            return new FaceToNameMatchViewModel(obj.FirstName, obj.Score);
+            return new FaceToNameMatchViewModel(source.FirstName, source.Score);
         }
     }
 }

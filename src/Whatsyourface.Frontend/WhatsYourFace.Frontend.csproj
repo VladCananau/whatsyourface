@@ -5,6 +5,9 @@
     <UserSecretsId>d11f626b-a4fa-4c11-836e-43b90c931926</UserSecretsId>
     <LangVersion>7.2</LangVersion>
     <CodeAnalysisRuleSet>..\codeanalysis.ruleset</CodeAnalysisRuleSet>
+    <ApplicationIcon />
+    <Win32Resource />
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -62,9 +65,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\Index.fr.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
